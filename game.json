@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/zilch-game-engine/game.json",
   "name": "Tic-Tac-Toe",
-  "engineVersion": 1,
+  "v": 1,
   "slots": [
     "Player One - X",
     "Player Two - O"
