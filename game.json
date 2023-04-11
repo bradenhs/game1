@@ -3,5 +3,6 @@
   "name": "Tic-Tac-Toe",
   "v": 1,
   "slots": ["Player One - X", "Player Two - O"],
-  "minSlots": 2
+  "minSlots": 2,
+  "templates": ["javascript.node"]
 }
