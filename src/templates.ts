@@ -6,7 +6,7 @@ export const templates = [
     run: "node index.js",
     files: {
       "index.js": file.executable`
-        console.log("Hello")
+        console.log("Hello 54321")
       `,
     },
   }),
