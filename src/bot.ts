@@ -1,14 +1,10 @@
-
-import type { BotConfig } from "zilch-game-engine";
-import type { Config } from "./config";
+import type { CreateBotParams } from "zilch-game-engine";
 
 export class Bot {
-  type: "practice" | "boss";
-  config: BotConfig<Config>;
+  params: CreateBotParams;
 
-  constructor(type: "practice" | "boss", config: BotConfig<Config>) {
-    this.type = type;
-    this.config = config;
+  constructor(params: CreateBotParams) {
+    this.params = params;
   }
 
   move(payload: string): string {

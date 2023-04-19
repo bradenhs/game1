@@ -1,5 +1,4 @@
-
-import { BotOutcome, Engine, Game, ParseMoveError } from "zilch-game-engine";
+import { BotOutcome, Engine, Game } from "zilch-game-engine";
 import type { Config } from "./config";
 import type { State } from "./state";
 
@@ -9,19 +8,20 @@ interface Move {
 }
 
 export async function* play(game: Game<Config>): Engine<State> {
+  let turn = game.config.initialTurn;
   const state: State = {
-    board: [
-      [null, null, null],
-      [null, null, null],
-      [null, null, null],
-    ],
+    board: game.config.initialBoard,
   };
 
   yield state;
 
-  let turn = 0;
-
   while (true) {
+    const outcome = getOutcomeAndWinningLine(state)?.outcome ?? null;
+
+    if (outcome !== null) {
+      return outcome;
+    }
+
     const botIndex = turn % 2 === 0 ? 0 : 1;
     const bot = game.bots[botIndex];
 
@@ -42,16 +42,9 @@ export async function* play(game: Game<Config>): Engine<State> {
         botIndex === 0 ? BotOutcome.Error : BotOutcome.None,
         botIndex === 1 ? BotOutcome.Error : BotOutcome.None,
       ];
-    }
-
-    state.board[move.x][move.y] = turn;
-
-    yield state;
-
-    const outcome = getOutcomeAndWinningLine(state)?.outcome ?? null;
-
-    if (outcome !== null) {
-      return outcome;
+    } else {
+      state.board[move.x][move.y] = turn;
+      yield state;
     }
 
     turn++;
@@ -66,7 +59,7 @@ function parseMoveResponse(response: string): Move {
   });
 
   if (x === undefined || y === undefined) {
-    throw new ParseMoveError();
+    throw new Error(`Response invalid: "${response}"`);
   }
 
   return { x, y };
