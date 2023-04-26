@@ -23,8 +23,8 @@ export const configSchema = {
         minItems: 3,
         maxItems: 3,
         items: {
-          type: ["string", "null"],
-          enum: ["X", "O", null],
+          type: ["string"],
+          enum: ["x", "o", "empty"],
         },
       },
     },
@@ -36,11 +36,11 @@ export const configSchema = {
  */
 export const configPresets = {
   Standard: `{
-  // 3x3 matrix with values "X", "O" and null
+  // 3x3 matrix with values "x", "o" and "empty"
   "startingPosition": [
-    [null, null, null],
-    [null, null, null],
-    [null, null, null]
+    ["empty", "empty", "empty"],
+    ["empty", "empty", "empty"],
+    ["empty", "empty", "empty"]
   ]
 }`,
 };
@@ -57,9 +57,9 @@ export function parseConfig(rawConfig: RawConfig) {
 
   const initialBoard = rawConfig.startingPosition.map((row) => {
     return row.map((spot) => {
-      if (spot === "X") {
+      if (spot === "x") {
         return xCount++ * 2;
-      } else if (spot === "O") {
+      } else if (spot === "o") {
         return oCount++ * 2 + 1;
       } else {
         return null;
