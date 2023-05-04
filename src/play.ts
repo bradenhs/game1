@@ -1,6 +1,7 @@
 import { BotOutcome, Engine, Game } from "zilch-game-engine";
 import type { Config } from "./config";
 import type { State } from "./state";
+import chalk from "chalk";
 
 interface Move {
   x: number;
@@ -13,8 +14,6 @@ export async function* play(game: Game<Config>): Engine<State> {
     board: game.config.initialBoard,
   };
 
-  yield state;
-
   while (true) {
     const outcome = getOutcomeAndWinningLine(state)?.outcome ?? null;
 
@@ -26,9 +25,10 @@ export async function* play(game: Game<Config>): Engine<State> {
     const bot = game.bots[botIndex];
 
     const payload = createMovePayload(state);
-    const move = await bot.move(payload).then(parseMoveResponse);
 
-    bot.writeln(`⤷ x=${move.x} y=${move.y}`);
+    bot.writeln(chalk.dim(`Start turn`));
+    const move = await bot.move(payload).then(parseMoveResponse);
+    bot.writeln(chalk.dim(`⤷ x=${move.x} y=${move.y}`));
 
     const spotValue = state.board[move.x][move.y];
 

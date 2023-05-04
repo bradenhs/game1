@@ -12,6 +12,11 @@ export class Renderer {
     this.container.style.alignItems = "center";
     this.container.style.justifyContent = "center";
     this.container.style.fontFamily = "monospace";
+    this.container.style.top = "20px";
+    this.container.style.bottom = "20px";
+    this.container.style.left = "20px";
+    this.container.style.right = "20px";
+    this.container.style.color = "white";
     document.body.appendChild(this.container);
   }
   render(params: RenderParams<State, Config>) {

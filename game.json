@@ -8,5 +8,6 @@
     "game": null,
     "turn": 100
   },
-  "templates": ["javascript.node"]
+  "templates": ["javascript.node"],
+  "moveDelay": 1500
 }
