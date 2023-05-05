@@ -2,7 +2,7 @@
   "$schema": "./node_modules/zilch-game-engine/game.json",
   "name": "Tic-Tac-Toe",
   "v": 1,
-  "slots": ["Player One · X", "Player Two · O"],
+  "slots": ["Player One · X", "Player Two · O", "Player Two · ?"],
   "minSlots": 2,
   "defaultTimeLimitMilliseconds": {
     "game": null,
