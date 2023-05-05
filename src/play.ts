@@ -111,7 +111,18 @@ function getOutcomeAndWinningLine(
 
   for (const player of [0, 1] as const) {
     const winningLine = winningLines.find((line) =>
-      line.every((position) => state.board[position.x]![position.y] === player)
+      line.every((position) => {
+        let value = state.board[position.x]?.[position.y];
+        if (value === null) {
+          return false;
+        }
+
+        if (Array.isArray(value)) {
+          value = value[0] ?? 0;
+        }
+
+        return value % 2 === player;
+      })
     );
 
     if (winningLine) {
