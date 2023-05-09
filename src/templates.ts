@@ -3,7 +3,7 @@ import { createTemplate, file } from "zilch-game-engine";
 export const templates = [
   createTemplate({
     id: "javascript.node",
-    run: "node index.js",
+    run: "node main.js",
     files: {
       "bot.js": file`
         class Bot {
