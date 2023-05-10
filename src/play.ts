@@ -27,13 +27,8 @@ export async function* play(game: Game<Config>): Engine<State> {
     const payload = createMovePayload(state);
 
     bot.writeln(chalk.dim(`Start turn`));
-    const { move, duration } = await bot.move(payload).then((response) => {
-      return {
-        move: parseMoveResponse(response.payload),
-        duration: response.duration,
-      };
-    });
-    bot.writeln(chalk.dim(`⤷ x=${move.x} y=${move.y} (${duration}ms)`));
+    const move = await bot.move(payload).then(parseMoveResponse);
+    bot.writeln(chalk.dim(`⤷ x=${move.x} y=${move.y}`));
 
     const spotValue = state.board[move.x][move.y];
 
