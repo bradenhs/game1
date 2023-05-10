@@ -5,9 +5,12 @@ export class Bot {
 
   constructor(params: CreateBotParams) {
     this.params = params;
+    this.params.println("Hello world!");
+    this.params.println("AND again");
   }
 
   move(payload: string): string {
+    this.params.println(payload);
     const board = payload.split("|").map((row) => row.split(","));
 
     for (let x = 0; x < 3; x++) {

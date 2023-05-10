@@ -6,7 +6,7 @@
   "minSlots": 2,
   "defaultTimeLimitMilliseconds": {
     "game": null,
-    "turn": 100
+    "move": 100
   },
   "templates": ["javascript.node"],
   "moveDelay": 1500
