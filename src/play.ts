@@ -27,14 +27,21 @@ export async function* play(game: Game<Config>): Engine<State> {
     const payload = createMovePayload(state);
 
     bot.writeln(chalk.dim(`Start turn`));
-    const move = await bot.move(payload).then(parseMoveResponse);
-    bot.writeln(chalk.dim(`⤷ x=${move.x} y=${move.y}`));
+    const { move, duration } = await bot.move(payload).then((response) => {
+      return {
+        move: parseMoveResponse(response.payload),
+        duration: response.duration,
+      };
+    });
+    bot.writeln(chalk.dim(`⤷ x=${move.x} y=${move.y} (${duration}ms)`));
 
     const spotValue = state.board[move.x][move.y];
 
     if (typeof spotValue === "number") {
       state.board[move.x][move.y] = [spotValue, turn];
-      bot.writeln(`Spot { x: ${move.x}, y: ${move.y} } already occupied.`);
+      bot.writeln(
+        chalk.red(`\nSpot { x: ${move.x}, y: ${move.y} } already occupied.`)
+      );
 
       yield state;
 
