@@ -34,16 +34,20 @@ export const configSchema = {
 /**
  * Preset configuration values
  */
-export const configPresets = {
-  Standard: `{
-  // 3x3 matrix with values "x", "o" and "empty"
-  "startingPosition": [
-    ["empty", "empty", "empty"],
-    ["empty", "empty", "empty"],
-    ["empty", "empty", "empty"]
-  ]
-}`,
-};
+export const configPresets = [
+  {
+    name: "Standard",
+    value:
+      `{\n` +
+      `  // 3x3 matrix with values "x", "o" and "empty"\n` +
+      `  "startingPosition": [\n` +
+      `    ["empty", "empty", "empty"],\n` +
+      `    ["empty", "empty", "empty"],\n` +
+      `    ["empty", "empty", "empty"]\n` +
+      `  ]\n` +
+      `}\n`,
+  },
+];
 
 export type Config = ReturnType<typeof parseConfig>;
 
